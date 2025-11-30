@@ -40,4 +40,13 @@ describe.each([
       }
     );
   });
+
+  describe('Parity', () => {
+    it('should have a YAML and JSON equivalent for every file', () => {
+      const jsonFiles = fg.sync([`${version}/json/*.json`]).map(file => path.basename(file, '.json'));
+      const yamlFiles = fg.sync([`${version}/yaml/*.yaml`]).map(file => path.basename(file, '.yaml'));
+
+      expect(jsonFiles.sort()).toStrictEqual(yamlFiles.sort());
+    });
+  });
 });
